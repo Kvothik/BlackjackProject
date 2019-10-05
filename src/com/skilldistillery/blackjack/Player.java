@@ -2,7 +2,7 @@ package com.skilldistillery.blackjack;
 
 public class Player {
 
-	Hand bjHand;
+	BlackjackHand bjHand;
 
 	public Player() {
 		bjHand = new BlackjackHand();
@@ -26,7 +26,7 @@ public class Player {
 	public int getHandValue() {
 		return bjHand.getHandValue();
 	}
-	
+
 	public boolean isBlackjack() {
 		boolean isBlackjack = false;
 		if (bjHand.getHandValue() == 21) {
@@ -34,7 +34,7 @@ public class Player {
 		}
 		return isBlackjack;
 	}
-	
+
 	public boolean isBust() {
 		boolean isBust = false;
 		if (bjHand.getHandValue() > 21) {

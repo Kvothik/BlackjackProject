@@ -1,7 +1,7 @@
 package com.skilldistillery.blackjack;
 
 public class Dealer {
-	Hand bjHand;
+	BlackjackHand bjHand;
 	Deck deck;
 
 	public Dealer() {
