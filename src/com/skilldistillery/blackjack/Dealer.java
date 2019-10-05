@@ -3,11 +3,13 @@ package com.skilldistillery.blackjack;
 public class Dealer {
 	BlackjackHand bjHand;
 	Deck deck;
-
+	Pot pot;
+	
 	public Dealer() {
 		bjHand = new BlackjackHand();
 		deck = new Deck();
 		deck.shuffleDeck();
+		pot = new Pot(0, 0, 100, 1000);
 	}
 
 	public Hand dealerGetHand() {
@@ -40,19 +42,51 @@ public class Dealer {
 		return bjHand.getHandValue();
 	}
 
-	public boolean isBlackjack() {
-		boolean isBlackjack = false;
-		if (bjHand.getHandValue() == 21) {
-			isBlackjack = true;
-		}
-		return isBlackjack;
+//	public boolean isBlackjack() {
+//		bjHand.isBlackjack();
+////		boolean isBlackjack = false;
+////		if (bjHand.getHandValue() == 21) {
+////			isBlackjack = true;
+////		}
+//		return bjHand.isBlackjack();
+//	}
+//	
+	public boolean isBust() {
+		bjHand.isBust();
+//		boolean isBust = false;
+//		if (bjHand.getHandValue() > 21) {
+//			isBust = true;
+//		}
+		return bjHand.isBust();
 	}
 	
-	public boolean isBust() {
-		boolean isBust = false;
-		if (bjHand.getHandValue() > 21) {
-			isBust = true;
-		}
-		return isBust;
+	public void playerBet(int bet) {
+		
+		pot.setPlayerMoney(getPlayerMoney() - bet);
+		pot.setPot(getPot() + bet);
+	}
+
+	public void win() {
+		pot.win();
+	}
+
+	public void lose() {
+		pot.lose();
+	}
+	
+	public void push() {
+		pot.push();
+	}
+	
+	public int getPlayerMoney() {
+		return pot.getPlayerMoney();
+	}
+	
+	public int getDealerMoney() {
+		return pot.getDealerMoney();
+	}
+	
+	public int getPot() {
+		return pot.getPot();
 	}
 }
