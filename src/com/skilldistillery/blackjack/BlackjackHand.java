@@ -3,13 +3,11 @@ package com.skilldistillery.blackjack;
 import java.util.ArrayList;
 
 public class BlackjackHand extends Hand {
-	
 
-	public BlackjackHand(){
+	public BlackjackHand() {
 		hand = new ArrayList<>();
 	}
-	
-	
+
 	public boolean isBlackjack() {
 		boolean isBlackjack = false;
 		if (getHandValue() == 21) {
@@ -17,7 +15,7 @@ public class BlackjackHand extends Hand {
 		}
 		return isBlackjack;
 	}
-	
+
 	public boolean isBust() {
 		boolean isBust = false;
 		if (getHandValue() > 21) {
@@ -25,7 +23,7 @@ public class BlackjackHand extends Hand {
 		}
 		return isBust;
 	}
-	
+
 //	public boolean isHard() {
 //		
 //	}

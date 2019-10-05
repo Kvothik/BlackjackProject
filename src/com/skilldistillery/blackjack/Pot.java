@@ -7,7 +7,6 @@ public class Pot {
 	private int dealerMoney;
 
 	public Pot(int pot, int bet, int playerMoney, int dealerMoney) {
-		super();
 		this.amountInPot = pot;
 		this.bet = bet;
 		this.playerMoney = playerMoney;
@@ -22,7 +21,7 @@ public class Pot {
 
 	public int win() {
 		setPlayerMoney(getPlayerMoney() + amountInPot * 2);
-		setDealerMoney(getDealerMoney());
+		setDealerMoney(getDealerMoney() - amountInPot);
 		return getPlayerMoney();
 	}
 

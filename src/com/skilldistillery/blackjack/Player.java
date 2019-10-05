@@ -23,23 +23,4 @@ public class Player {
 		System.out.println();
 	}
 
-	public int getHandValue() {
-		return bjHand.getHandValue();
-	}
-
-	public boolean isBlackjack() {
-		boolean isBlackjack = false;
-		if (bjHand.getHandValue() == 21) {
-			isBlackjack = true;
-		}
-		return isBlackjack;
-	}
-
-	public boolean isBust() {
-		boolean isBust = false;
-		if (bjHand.getHandValue() > 21) {
-			isBust = true;
-		}
-		return isBust;
-	}
 }
