@@ -7,8 +7,15 @@ public class BlackjackTable {
 	Player p1;
 
 	public void launch(Scanner kb, Dealer dealer) {
+		dealer.pot.clearPot();
+		System.out.println("Dealer: \"Welcome to the Blackjack table! Please have a seat.");
+		System.out.println("Wallet: $" + dealer.pot.getPlayerMoney() + "\nSelect amount to bet: ");
+		System.out.println("1. $15\t\t2. $20\t\t3. $50\t\t4. $100");
+		int bet = kb.nextInt();
+		playerBet(bet, dealer);
+
 		if (newGame(kb, dealer) == false) {
-			if (playerTurn(kb, dealer) == false) {
+			if (playerTurn(kb, dealer, bet) == false) {
 				if (dealerTurn(dealer) == false) {
 					winCon(dealer);
 				}
@@ -19,14 +26,8 @@ public class BlackjackTable {
 	public boolean newGame(Scanner kb, Dealer dealer) {
 		p1 = new Player();
 		dealer.bjHand.clearHand();
-		dealer.pot.clearPot();
 		dealer.deck.shuffleDeck();
-		System.out.println(dealer.deck.checkDeckSize());
-		System.out.println("Dealer: \"Welcome to the Blackjack table! Please have a seat.");
-		System.out.println("Wallet: $" + dealer.pot.getPlayerMoney() + "\nSelect amount to bet: ");
-		System.out.println("1. $15\t\t2. $20\t\t3. $50\t\t4. $100");
-		int bet = kb.nextInt();
-		playerBet(bet, dealer);
+		System.out.println("Cards in current deck" + dealer.deck.checkDeckSize());
 
 		p1.dealCardToPlayer(dealer.sendCard());
 		dealer.dealCardToDealer(dealer.sendCard());
@@ -56,21 +57,15 @@ public class BlackjackTable {
 		return false;
 	}
 
-	public boolean playerTurn(Scanner kb, Dealer dealer) {
+	public boolean playerTurn(Scanner kb, Dealer dealer, int bet) {
 		int yourTurn = 0;
 		do {
-			System.out.println("\nAction: \n1. Hit\t2. Stay");
+			System.out.println("\nAction: \n1. Hit\t2. Stay\t3. Double Down");
 			yourTurn = kb.nextInt();
 			switch (yourTurn) {
-			case 1:
+			case 1:// hit
 				System.out.println("*Player Hand*");
-				p1.dealCardToPlayer(dealer.sendCard());// hit
-//				for (Card card : p1.bjHand.getHand()) {
-//					if (card.getValue() == 11) {
-//						System.out.println("With hard Ace: " + p1.bjHand.getHandValue() + "With soft ace: "
-//								+ (p1.bjHand.getHandValue() - 10));
-//					}
-//				}
+				p1.dealCardToPlayer(dealer.sendCard());
 				p1.showHand();
 				System.out.println("Current hand value: " + p1.bjHand.getHandValue());
 				if (p1.bjHand.isBust()) {
@@ -81,7 +76,21 @@ public class BlackjackTable {
 					return true;
 				}
 				continue;
-			case 2:
+			case 2:// Stay
+				return false;
+			case 3:// double down
+				System.out.println("*Player Hand*");
+				p1.dealCardToPlayer(dealer.sendCard());
+				p1.showHand();
+				System.out.println("Current hand value: " + p1.bjHand.getHandValue());
+				playerBet(bet, dealer);
+				if (p1.bjHand.isBust()) {
+					System.out.println("Busted.\nYou Lose.");
+					dealer.pot.lose();
+					System.out.println("Wallet: " + dealer.pot.getPlayerMoney() + "\t\tDealer Money: "
+							+ dealer.pot.getDealerMoney());
+					return true;
+				}
 				return false;
 			default:
 				System.out.println("Invalid selection, please try again.");
@@ -138,19 +147,19 @@ public class BlackjackTable {
 		switch (bet) {
 		case 1:
 			dealer.pot.playerBet(15);
-			System.out.println("Pot: $" + dealer.pot.getPot());
+			System.out.println("Wallet: $" + dealer.pot.getPlayerMoney() + "\t\t" + "Pot: $" + dealer.pot.getPot());
 			break;
 		case 2:
 			dealer.pot.playerBet(20);
-			System.out.println("Pot: $" + dealer.pot.getPot());
+			System.out.println("Wallet: $" + dealer.pot.getPlayerMoney() + "\t\t" + "Pot: $" + dealer.pot.getPot());
 			break;
 		case 3:
 			dealer.pot.playerBet(50);
-			System.out.println("Pot: $" + dealer.pot.getPot());
+			System.out.println("Wallet: $" + dealer.pot.getPlayerMoney() + "\t\t" + "Pot: $" + dealer.pot.getPot());
 			break;
 		case 4:
 			dealer.pot.playerBet(100);
-			System.out.println("Pot: $" + dealer.pot.getPot());
+			System.out.println("Wallet: $" + dealer.pot.getPlayerMoney() + "\t\t" + "Pot: $" + dealer.pot.getPot());
 			break;
 		default:
 			System.out.println("Invalid selection, please try again.");
