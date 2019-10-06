@@ -1,6 +1,6 @@
-##### Week 4 Homework Project for Skill Distillery
+# Week 4 Homework Project for Skill Distillery
 
-#### Overview
+## Overview
 
 Blackjack is a text based blackjack game. To explain how it was built, I will give a short rundown of each class and how they play a part.
 
