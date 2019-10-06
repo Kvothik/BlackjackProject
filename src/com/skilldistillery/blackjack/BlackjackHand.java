@@ -40,4 +40,8 @@ public class BlackjackHand extends Hand {
 		}
 		return handValue;
 	}
+	
+	public void clearHand() {
+		hand.removeAll(hand);
+	}
 }

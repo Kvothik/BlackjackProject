@@ -37,5 +37,9 @@ public class Dealer {
 		}
 		System.out.println();
 	}
+	
+	public void clearHand() {
+		bjHand.clearHand();
+	}
 
 }

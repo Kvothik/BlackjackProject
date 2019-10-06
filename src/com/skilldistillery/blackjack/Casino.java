@@ -6,11 +6,12 @@ public class Casino {
 
 	public static void main(String[] args) {
 		Scanner kb = new Scanner(System.in);
+		Dealer dealer = new Dealer();
 		Casino kinkyKelly = new Casino();
-		kinkyKelly.launch(kb);
+		kinkyKelly.launch(kb, dealer);
 	}
 
-	public void launch(Scanner kb) {
+	public void launch(Scanner kb, Dealer dealer) {
 		System.out.println("Welcome to KinkyKelly Casino");
 		int gameChoice;
 		do {
@@ -19,7 +20,7 @@ public class Casino {
 		switch (gameChoice) {
 		case 1:
 			BlackjackTable table1 = new BlackjackTable();
-			table1.launch(kb);
+			table1.launch(kb, dealer);
 			break;
 		case 2:
 //			Holdem table2 = new Holdem();

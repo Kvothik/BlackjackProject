@@ -66,4 +66,8 @@ public class Pot {
 	public void setDealerMoney(int dealerMoney) {
 		this.dealerMoney = dealerMoney;
 	}
+	
+	public void clearPot() {
+		setPot(0);
+	}
 }

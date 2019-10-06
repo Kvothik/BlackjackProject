@@ -5,27 +5,27 @@ import java.util.Scanner;
 public class BlackjackTable {
 
 	Player p1;
-	Dealer dealer;
+	
 
-	public void launch(Scanner kb) {
-		if (newGame(kb) == false) {
-			if (playerTurn(kb) == false) {
-				if (dealerTurn() == false) {
-					winCon();
+	public void launch(Scanner kb, Dealer dealer) {
+		if (newGame(kb, dealer) == false) {
+			if (playerTurn(kb, dealer) == false) {
+				if (dealerTurn(dealer) == false) {
+					winCon(dealer);
 				}
 			}
 		}
 	}
 
-	public boolean newGame(Scanner kb) {
+	public boolean newGame(Scanner kb, Dealer dealer) {
 		p1 = new Player();
-		dealer = new Dealer();
-
+		dealer.bjHand.clearHand();
+		dealer.pot.clearPot();
 		System.out.println("Dealer: \"Welcome to the Blackjack table! Please have a seat.");
 		System.out.println("Wallet: $" + dealer.pot.getPlayerMoney() + "\nSelect amount to bet: ");
 		System.out.println("1. $15\t\t2. $20\t\t3. $50\t\t4. $100");
 		int bet = kb.nextInt();
-		playerBet(bet);
+		playerBet(bet, dealer);
 
 		p1.dealCardToPlayer(dealer.sendCard());
 		dealer.dealCardToDealer(dealer.sendCard());
@@ -53,7 +53,7 @@ public class BlackjackTable {
 		return false;
 	}
 
-	public boolean playerTurn(Scanner kb) {
+	public boolean playerTurn(Scanner kb, Dealer dealer) {
 		int yourTurn = 0;
 		do {
 			System.out.println("\nAction: \n1. Hit\t2. Stay");
@@ -82,7 +82,7 @@ public class BlackjackTable {
 		return false;
 	}
 
-	public boolean dealerTurn() {
+	public boolean dealerTurn(Dealer dealer) {
 		System.out.println("\n*Dealer Hand*");
 		dealer.showHand();
 		System.out.println("Dealer current hand value: " + dealer.bjHand.getHandValue());
@@ -101,7 +101,7 @@ public class BlackjackTable {
 		return false;
 	}
 
-	public boolean winCon() {
+	public boolean winCon(Dealer dealer) {
 		if (p1.bjHand.getHandValue() < dealer.bjHand.getHandValue()) {
 			System.out.println("Dealer wins!");
 			dealer.pot.lose();
@@ -121,7 +121,7 @@ public class BlackjackTable {
 		return false;
 	}
 
-	public void playerBet(int bet) {
+	public void playerBet(int bet, Dealer dealer) {
 		switch (bet) {
 		case 1:
 			dealer.pot.playerBet(15);
