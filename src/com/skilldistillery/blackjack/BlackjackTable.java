@@ -5,7 +5,6 @@ import java.util.Scanner;
 public class BlackjackTable {
 
 	Player p1;
-	
 
 	public void launch(Scanner kb, Dealer dealer) {
 		if (newGame(kb, dealer) == false) {
@@ -21,6 +20,8 @@ public class BlackjackTable {
 		p1 = new Player();
 		dealer.bjHand.clearHand();
 		dealer.pot.clearPot();
+		dealer.deck.shuffleDeck();
+		System.out.println(dealer.deck.checkDeckSize());
 		System.out.println("Dealer: \"Welcome to the Blackjack table! Please have a seat.");
 		System.out.println("Wallet: $" + dealer.pot.getPlayerMoney() + "\nSelect amount to bet: ");
 		System.out.println("1. $15\t\t2. $20\t\t3. $50\t\t4. $100");
@@ -35,7 +36,8 @@ public class BlackjackTable {
 		if (p1.bjHand.isBlackjack()) {
 			System.out.println("Player Blackjack!\t You Win!\n");
 			dealer.pot.win();
-			System.out.println("Wallet: " + dealer.pot.getPlayerMoney() + "\t\tDealer Money: " + dealer.pot.getDealerMoney());
+			System.out.println(
+					"Wallet: " + dealer.pot.getPlayerMoney() + "\t\tDealer Money: " + dealer.pot.getDealerMoney());
 			return true;
 		}
 		p1.showHand();
@@ -47,7 +49,8 @@ public class BlackjackTable {
 			System.out.println("Dealer Blackjack!\tSorry for your luck!\n");
 			dealer.pot.lose();
 			dealer.showHand();
-			System.out.println("Wallet: " + dealer.pot.getPlayerMoney() + "\t\tDealer Money: " + dealer.pot.getDealerMoney());
+			System.out.println(
+					"Wallet: " + dealer.pot.getPlayerMoney() + "\t\tDealer Money: " + dealer.pot.getDealerMoney());
 			return true;
 		}
 		return false;
@@ -62,13 +65,19 @@ public class BlackjackTable {
 			case 1:
 				System.out.println("*Player Hand*");
 				p1.dealCardToPlayer(dealer.sendCard());// hit
+//				for (Card card : p1.bjHand.getHand()) {
+//					if (card.getValue() == 11) {
+//						System.out.println("With hard Ace: " + p1.bjHand.getHandValue() + "With soft ace: "
+//								+ (p1.bjHand.getHandValue() - 10));
+//					}
+//				}
 				p1.showHand();
 				System.out.println("Current hand value: " + p1.bjHand.getHandValue());
 				if (p1.bjHand.isBust()) {
 					System.out.println("Busted.\nYou Lose.");
 					dealer.pot.lose();
-					System.out.println(
-							"Wallet: " + dealer.pot.getPlayerMoney() + "\t\tDealer Money: " + dealer.pot.getDealerMoney());
+					System.out.println("Wallet: " + dealer.pot.getPlayerMoney() + "\t\tDealer Money: "
+							+ dealer.pot.getDealerMoney());
 					return true;
 				}
 				continue;
@@ -95,7 +104,8 @@ public class BlackjackTable {
 		if (dealer.bjHand.isBust()) {
 			System.out.println("Dealer bust.\n You win!");
 			dealer.pot.win();
-			System.out.println("Wallet: " + dealer.pot.getPlayerMoney() + "\t\tDealer Money: " + dealer.pot.getDealerMoney());
+			System.out.println(
+					"Wallet: " + dealer.pot.getPlayerMoney() + "\t\tDealer Money: " + dealer.pot.getDealerMoney());
 			return true;
 		}
 		return false;
@@ -105,17 +115,20 @@ public class BlackjackTable {
 		if (p1.bjHand.getHandValue() < dealer.bjHand.getHandValue()) {
 			System.out.println("Dealer wins!");
 			dealer.pot.lose();
-			System.out.println("Wallet: " + dealer.pot.getPlayerMoney() + "\t\tDealer Money: " + dealer.pot.getDealerMoney());
+			System.out.println(
+					"Wallet: " + dealer.pot.getPlayerMoney() + "\t\tDealer Money: " + dealer.pot.getDealerMoney());
 			return true;
 		} else if (p1.bjHand.getHandValue() > dealer.bjHand.getHandValue()) {
 			System.out.println("Player wins!");
 			dealer.pot.win();
-			System.out.println("Wallet: " + dealer.pot.getPlayerMoney() + "\t\tDealer Money: " + dealer.pot.getDealerMoney());
+			System.out.println(
+					"Wallet: " + dealer.pot.getPlayerMoney() + "\t\tDealer Money: " + dealer.pot.getDealerMoney());
 			return true;
 		} else if (p1.bjHand.getHandValue() == dealer.bjHand.getHandValue()) {
 			System.out.println("Push!");
 			dealer.pot.push();
-			System.out.println("Wallet: " + dealer.pot.getPlayerMoney() + "\t\tDealer Money: " + dealer.pot.getDealerMoney());
+			System.out.println(
+					"Wallet: " + dealer.pot.getPlayerMoney() + "\t\tDealer Money: " + dealer.pot.getDealerMoney());
 			return true;
 		}
 		return false;

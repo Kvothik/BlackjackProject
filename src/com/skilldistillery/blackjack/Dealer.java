@@ -8,7 +8,6 @@ public class Dealer {
 	public Dealer() {
 		bjHand = new BlackjackHand();
 		deck = new Deck();
-		deck.shuffleDeck();
 		pot = new Pot(0, 0, 100, 1000);
 	}
 
@@ -41,5 +40,5 @@ public class Dealer {
 	public void clearHand() {
 		bjHand.clearHand();
 	}
-
+	
 }
