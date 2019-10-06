@@ -8,10 +8,6 @@ public class Player {
 		bjHand = new BlackjackHand();
 	}
 
-	public Hand playerGetHand() {
-		return bjHand;
-	}
-
 	public void dealCardToPlayer(Card c) {
 		bjHand.addCard(c);
 	}
