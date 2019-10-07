@@ -6,7 +6,7 @@ Blackjack is a text based blackjack game. To explain how it was built, I will gi
 
 Note - the Dealer is instantiated in the Casino class in order to prevent creating a new pot each new round.
 
-### Casino
+## Casino
 
 The Casino class is where main is. The user is prompted with a menu to select the game they would like to play.
 
@@ -18,20 +18,20 @@ Currently, the only game I have created is Blackjack. I plan on implementing the
 
 Once the user selects the game, their choice is passed to a switch that then calls the launch method in the selected game.
 
-### Suit
+## Suit
 
 The Suit enum defines a cards Suit. It contains HEARTS, SPADES, CLUBS, and DIAMONDS. Instead of assigning the name of each Suit eg. "Hearts", I used the unicode reference to each corresponding emoji.
 
-### Rank
+## Rank
 
 The Rank enum defines a cards value 1-10 and 11 for ACE. Soft and hard ACES is to be implemented soon.
 
-### Hand
+## Hand
 
 Hand is an abstract class which has a protected List<Card>. Hand also has methods to add a card to the list, clear the list of cards, and a constructor.
 Hand was designed to be reused for other games when I make Texas Hold'em and Mississippi Stud.
 
-### Pot
+## Pot
 
 The Pot class contains constructors and methods which define what happens with money in the game. This will be an ongoing stretch goal to make everything better, but everything works as of now.
 
@@ -45,7 +45,7 @@ push() - returns bet to player money as this only happens in a draw with no winn
 
 clear() - sets pot to 0 for the start of a new round.
 
-### Dealer
+## Dealer
 
 The Dealer class has-a BlackjackHand, Deck, and a Pot. I used the Dealer to mimic real life. For example the Dealer will handle the Pot, deal the Cards and shuffle the Deck.
 
@@ -66,7 +66,7 @@ showHand() - Shows all of the dealers cards at the start of dealer turn to deter
 
 Along with all methods for the classes the dealer has-a instance of.
 
-### Player
+## Player
 
 The Player class has-a BlackjackHand and only a few methods.
 
@@ -74,11 +74,11 @@ dealCardToPlayer(dealer.sendCard) - Adds a card to players BlackjackHand.
 
 showHand() - Uses a foreach loop to display cards in the players hand.
 
-### Card
+## Card
 
 The Card class defines what a Card is using enums Suit and Rank.
 
-### Deck
+## Deck
 
 The Deck class has-a List<Card>.
 
@@ -90,7 +90,7 @@ dealCard() - Removes a card from the deck. This method is used by the dealer to 
 
 shuffleDeck() - Uses Collections.shuffle(deck) to shuffle the cards.
 
-### BlackjackHand
+## BlackjackHand
 
 The class BlackjackHand is the blackjack games subclass of abstract Hand.
 
