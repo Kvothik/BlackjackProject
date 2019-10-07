@@ -6,7 +6,7 @@ import java.util.List;
 public abstract class Hand {
 
 	protected List<Card> hand;
-
+	 
 	public List<Card> getHand() {
 		return hand;
 	}
@@ -26,6 +26,9 @@ public abstract class Hand {
 	public void clearHand() {
 		hand.removeAll(hand);
 	}
+	
+	
+	
 
 	public abstract int getHandValue();
 		

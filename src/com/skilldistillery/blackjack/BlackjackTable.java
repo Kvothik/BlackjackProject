@@ -59,43 +59,59 @@ public class BlackjackTable {
 
 	public boolean playerTurn(Scanner kb, Dealer dealer, int bet) {
 		int yourTurn = 0;
-		do {
-			System.out.println("\nAction: \n1. Hit\t2. Stay\t3. Double Down");
-			yourTurn = kb.nextInt();
-			switch (yourTurn) {
-			case 1:// hit
-				System.out.println("*Player Hand*");
-				p1.dealCardToPlayer(dealer.sendCard());
-				p1.showHand();
-				System.out.println("Current hand value: " + p1.bjHand.getHandValue());
-				if (p1.bjHand.isBust()) {
-					System.out.println("Busted.\nYou Lose.");
-					dealer.pot.lose();
-					System.out.println("Wallet: " + dealer.pot.getPlayerMoney() + "\t\tDealer Money: "
-							+ dealer.pot.getDealerMoney());
-					return true;
+//			int firstCard = 0;
+//			int secondCard = 0;
+//			for (Card card : p1.bjHand.hand) {
+//				firstCard = card.getValue();
+//				break;
+//			}
+//			for (Card card : p1.bjHand.hand) {
+//				secondCard = card.getValue();
+//			}
+			do {
+//			if (firstCard == secondCard) {
+//				System.out.println("\nAction: \n1. Hit\t2. Stay\t3. Double Down\t4. Split");
+//			} else {
+				System.out.println("\nAction: \n1. Hit\t2. Stay\t3. Double Down");
+				yourTurn = kb.nextInt();
+
+				switch (yourTurn) {
+				case 1:// hit
+					System.out.println("*Player Hand*");
+					p1.dealCardToPlayer(dealer.sendCard());
+					p1.showHand();
+					System.out.println("Current hand value: " + p1.bjHand.getHandValue());
+					if (p1.bjHand.isBust()) {
+						System.out.println("Busted.\nYou Lose.");
+						dealer.pot.lose();
+						System.out.println("Wallet: " + dealer.pot.getPlayerMoney() + "\t\tDealer Money: "
+								+ dealer.pot.getDealerMoney());
+						return true;
+					}
+					continue;
+				case 2:// Stay
+					return false;
+				case 3:// Double down
+					System.out.println("*Player Hand*");
+					p1.dealCardToPlayer(dealer.sendCard());
+					p1.showHand();
+					System.out.println("Current hand value: " + p1.bjHand.getHandValue());
+					playerBet(bet, dealer);
+					if (p1.bjHand.isBust()) {
+						System.out.println("Busted.\nYou Lose.");
+						dealer.pot.lose();
+						System.out.println("Wallet: " + dealer.pot.getPlayerMoney() + "\t\tDealer Money: "
+								+ dealer.pot.getDealerMoney());
+						return true;
+					}
+					return false;
+//				case 4:// Split
+//					split(kb, dealer, bet);
+				default:
+					System.out.println("Invalid selection, please try again.");
+					break;
 				}
-				continue;
-			case 2:// Stay
-				return false;
-			case 3:// double down
-				System.out.println("*Player Hand*");
-				p1.dealCardToPlayer(dealer.sendCard());
-				p1.showHand();
-				System.out.println("Current hand value: " + p1.bjHand.getHandValue());
-				playerBet(bet, dealer);
-				if (p1.bjHand.isBust()) {
-					System.out.println("Busted.\nYou Lose.");
-					dealer.pot.lose();
-					System.out.println("Wallet: " + dealer.pot.getPlayerMoney() + "\t\tDealer Money: "
-							+ dealer.pot.getDealerMoney());
-					return true;
-				}
-				return false;
-			default:
-				System.out.println("Invalid selection, please try again.");
-				break;
-			}
+//			}
 		} while (yourTurn != 2);
 		return false;
 	}
@@ -166,4 +182,23 @@ public class BlackjackTable {
 			break;
 		}
 	}
+
+//	public void split(Scanner kb, Dealer dealer, int bet) {
+//		Card newHand1 = new Card();
+//		Card newHand2 = new Card();
+//		for (Card card : p1.bjHand.hand) {
+//			newHand1 = card;
+//			break;
+//		}
+//		for (Card card : p1.bjHand.hand) {
+//			newHand2 = card;
+//		}
+//		p1.clearHand();
+//		p1.splitAdd(newHand1);
+//		p1.addSplitCard(dealer.sendCard());
+//		playerTurn(kb, dealer, bet);
+//		p1.bjHand.addCard(newHand2);
+//		p1.dealCardToPlayer(dealer.sendCard());
+//		playerTurn(kb, dealer, bet);
+//	}
 }
